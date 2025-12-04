@@ -35,11 +35,11 @@ public class ParentSignupone {
      * User data class to hold user information
      */
     private static class UserData {
-        private String firstName;
-        private String lastName;
-        private String email;
-        private String phone;
-        private String dateOfBirth;
+        private final String firstName;
+        private final String lastName;
+        private final String email;
+        private final String phone;
+        private final String dateOfBirth;
         
         public UserData(String firstName, String lastName, String email, String phone, String dateOfBirth) {
             this.firstName = firstName;
@@ -440,7 +440,7 @@ public class ParentSignupone {
             
             // Switch to the new tab
             java.util.Set<String> tabs = driver.getWindowHandles();
-            String[] tabArray = tabs.toArray(new String[0]);
+            String[] tabArray = tabs.toArray(new String[tabs.size()]);
             driver.switchTo().window(tabArray[1]);
             System.out.println("✅ Switched to YOPmail tab");
             

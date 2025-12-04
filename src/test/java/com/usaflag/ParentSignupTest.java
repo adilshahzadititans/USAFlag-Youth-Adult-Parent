@@ -35,7 +35,7 @@ public class ParentSignupTest {
     private List<UserData> userDataList;
     private UserData currentUserData;
     private String verificationEmail;
-    private boolean iterateAll = true; // iterate over all CSV rows
+    private final boolean iterateAll = true; // iterate over all CSV rows
     private int nextUserIndex = 0;
     
     // Configuration
@@ -48,11 +48,11 @@ public class ParentSignupTest {
      * User data class to hold CSV data
      */
     private static class UserData {
-        private String firstName;
-        private String lastName;
-        private String email;
-        private String phone;
-        private String dateOfBirth;
+        private final String firstName;
+        private final String lastName;
+        private final String email;
+        private final String phone;
+        private final String dateOfBirth;
         
         public UserData(String firstName, String lastName, String email, String phone, String dateOfBirth) {
             this.firstName = firstName;
@@ -599,7 +599,7 @@ public class ParentSignupTest {
             
             // Switch to the new tab
             java.util.Set<String> tabs = driver.getWindowHandles();
-            String[] tabArray = tabs.toArray(new String[0]);
+            String[] tabArray = tabs.toArray(new String[tabs.size()]);
             driver.switchTo().window(tabArray[1]);
             System.out.println("✅ Switched to YOPmail tab");
             
