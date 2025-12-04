@@ -39,8 +39,8 @@ public class ParentSignupTest {
     private int nextUserIndex = 0;
     
     // Configuration
-    // private static final String LOGIN_URL = "https://staging-usaflag-playerportal.azurewebsites.net/login"; // stage URL
-    private static final String LOGIN_URL = "https://prod-usaflag-player-portal.azurewebsites.net/"; // production URL
+    private static final String LOGIN_URL = "https://staging-usaflag-playerportal.azurewebsites.net/login"; // stage URL
+    // private static final String LOGIN_URL = "https://prod-usaflag-player-portal.azurewebsites.net/"; // production URL
     private static final String CSV_FILE_PATH = "user_data.csv";
     private static final String SUCCESS_CSV_FILE_PATH = "successful_parent_signup.csv";
     
@@ -594,91 +594,92 @@ public class ParentSignupTest {
             }
             
             // Step 2: Open new tab and navigate to YOPmail
-            // System.out.println("🌐 Step 2: Opening YOPmail in new tab...");
-            // ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("window.open('https://yopmail.com/', '_blank');");
+            System.out.println("🌐 Step 2: Opening YOPmail in new tab...");
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("window.open('https://yopmail.com/', '_blank');");
             
             // Switch to the new tab
-            // java.util.Set<String> tabs = driver.getWindowHandles();
-            // String[] tabArray = tabs.toArray(new String[0]);
-            // driver.switchTo().window(tabArray[1]);
-            // System.out.println("✅ Switched to YOPmail tab");
+            java.util.Set<String> tabs = driver.getWindowHandles();
+            String[] tabArray = tabs.toArray(new String[0]);
+            driver.switchTo().window(tabArray[1]);
+            System.out.println("✅ Switched to YOPmail tab");
             
             // Wait for YOPmail to load
-            // Thread.sleep(3000);
+            Thread.sleep(3000);
             
             // Step 3: Enter email in YOPmail login field
-            // System.out.println("📧 Step 3: Entering email in YOPmail: " + verificationEmail);
-            // WebElement yopmailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='login']")));
-            // yopmailInput.clear();
-            // yopmailInput.sendKeys(verificationEmail);
-            // System.out.println("✅ Email entered in YOPmail");
+            System.out.println("📧 Step 3: Entering email in YOPmail: " + verificationEmail);
+            WebElement yopmailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='login']")));
+            yopmailInput.clear();
+            yopmailInput.sendKeys(verificationEmail);
+            System.out.println("✅ Email entered in YOPmail");
             
             // Step 4: Click the check email button
-            // System.out.println("🔍 Step 4: Clicking check email button...");
-            // WebElement checkEmailButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@class='material-icons-outlined f36']")));
-            // checkEmailButton.click();
-            // System.out.println("✅ Check email button clicked");
+            System.out.println("🔍 Step 4: Clicking check email button...");
+            WebElement checkEmailButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@class='material-icons-outlined f36']")));
+            checkEmailButton.click();
+            System.out.println("✅ Check email button clicked");
             
             // Wait for inbox to load
-            // Thread.sleep(3000);
+            Thread.sleep(3000);
             
             // Step 5: Find the 6-digit verification code
             System.out.println("🔢 Step 5: Looking for 6-digit verification code...");
             String verificationCode = null;
             
-            // try {
-            //     // Wait for the email iframe to load
-            //     System.out.println("📧 Waiting for email iframe to load...");
-            //     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ifmail")));
+            try {
+                // Wait for the email iframe to load
+                System.out.println("📧 Waiting for email iframe to load...");
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ifmail")));
                 
-            //     // Switch to the iframe containing the email content
-            //     driver.switchTo().frame("ifmail");
-            //     System.out.println("✅ Switched to email iframe");
+                // Switch to the iframe containing the email content
+                driver.switchTo().frame("ifmail");
+                System.out.println("✅ Switched to email iframe");
                 
-            //     // Wait for email content to load
-            //     Thread.sleep(2000);
+                // Wait for email content to load
+                Thread.sleep(2000);
                 
-            //     // Look for the OTP element with specific styling
-            //     System.out.println("🔍 Looking for OTP element with specific styling...");
-            //     WebElement otpElement = wait.until(
-            //         ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(@style, 'font-size: 24px') and contains(@style, 'font-weight: bold')]"))
-            //     );
+                // Look for the OTP element with specific styling
+                System.out.println("🔍 Looking for OTP element with specific styling...");
+                WebElement otpElement = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(@style, 'font-size: 24px') and contains(@style, 'font-weight: bold')]"))
+                );
                 
-            //     String otpText = otpElement.getText();
-            //     System.out.println("📧 OTP element text: " + otpText);
+                String otpText = otpElement.getText();
+                System.out.println("📧 OTP element text: " + otpText);
                 
-            //     // Extract 6-digit code using regex
-            //     java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\\d{6}");
-            //     java.util.regex.Matcher matcher = pattern.matcher(otpText);
-            //     if (matcher.find()) {
-            //         verificationCode = matcher.group();
-            //         System.out.println("✅ Found 6-digit code: " + verificationCode);
-            //     } else {
-            //         System.out.println("⚠️ No 6-digit code found in OTP element");
-            //     }
+                // Extract 6-digit code using regex
+                java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\\d{6}");
+                java.util.regex.Matcher matcher = pattern.matcher(otpText);
+                if (matcher.find()) {
+                    verificationCode = matcher.group();
+                    System.out.println("✅ Found 6-digit code: " + verificationCode);
+                } else {
+                    System.out.println("⚠️ No 6-digit code found in OTP element");
+                }
                 
-            //     // Switch back from iframe
-            //     driver.switchTo().defaultContent();
-            //     System.out.println("✅ Switched back from email iframe");
+                // Switch back from iframe
+                driver.switchTo().defaultContent();
+                System.out.println("✅ Switched back from email iframe");
                 
-            // } catch (Exception e) {
-            //     System.out.println("⚠️ Could not find code in iframe, using default: 123456");
-            //     verificationCode = "12345678";
-            // }
+            } catch (Exception e) {
+                System.out.println("⚠️ Could not find code in iframe");
+                // verificationCode = "111111"; // Commented out - use actual OTP from email
+            }
             
-            // if (verificationCode == null) {
-            //     System.out.println("⚠️ Could not find verification code, using default: 123456");
-            //     verificationCode = "12345678";
-            // }
+            if (verificationCode == null) {
+                System.out.println("⚠️ Could not find verification code");
+                // verificationCode = "111111"; // Commented out - use actual OTP from email
+                throw new RuntimeException("Failed to extract verification code from email");
+            }
             
             // Use hardcoded OTP instead
-            verificationCode = "111111";
-            System.out.println("🔢 Using hardcoded OTP: " + verificationCode);
+            // verificationCode = "111111";
+            // System.out.println("🔢 Using hardcoded OTP: " + verificationCode);
             
             // Step 6: Navigate back to verification page
-            // System.out.println("🔄 Step 6: Navigating back to verification page...");
-            // driver.switchTo().window(tabArray[0]);
-            // System.out.println("✅ Switched back to verification page");
+            System.out.println("🔄 Step 6: Navigating back to verification page...");
+            driver.switchTo().window(tabArray[0]);
+            System.out.println("✅ Switched back to verification page");
             
             // Step 7: Enter verification code
             System.out.println("🔢 Step 7: Entering verification code: " + verificationCode);

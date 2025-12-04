@@ -503,13 +503,14 @@ public class ParentSignupone {
                 System.out.println("✅ Switched back from email iframe");
                 
             } catch (Exception e) {
-                System.out.println("⚠️ Could not find code in iframe, using default: 111111");
-                verificationCode = "111111";
+                System.out.println("⚠️ Could not find code in iframe");
+                // verificationCode = "111111"; // Commented out - use actual OTP from email
             }
             
             if (verificationCode == null) {
-                System.out.println("⚠️ Could not find verification code, using default: 111111");
-                verificationCode = "111111";
+                System.out.println("⚠️ Could not find verification code");
+                // verificationCode = "111111"; // Commented out - use actual OTP from email
+                throw new RuntimeException("Failed to extract verification code from email");
             }
             
             // Step 6: Navigate back to verification page

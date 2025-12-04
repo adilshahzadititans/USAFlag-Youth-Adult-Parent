@@ -43,8 +43,8 @@ public class AdultSignupTest {
     private final Random rng = new Random();
     
     // Configuration
-    // private static final String LOGIN_URL = "https://staging-usaflag-playerportal.azurewebsites.net/login"; // stage URL
-    private static final String LOGIN_URL = "https://prod-usaflag-player-portal.azurewebsites.net/login"; // production URL
+    private static final String LOGIN_URL = "https://staging-usaflag-playerportal.azurewebsites.net/login"; // stage URL
+    // private static final String LOGIN_URL = "https://prod-usaflag-player-portal.azurewebsites.net/login"; // production URL
     private static final String CSV_FILE_PATH = "adult_user_data.csv";
     private static final String SUCCESS_CSV_FILE_PATH = "successful_adult_signups.csv";
     
@@ -675,13 +675,14 @@ public class AdultSignupTest {
                 System.out.println("✅ Switched back from email iframe");
                 
             } catch (Exception e) {
-                System.out.println("⚠️ Could not find code in iframe, using default: 111111");
-                verificationCode = "111111";
+                System.out.println("⚠️ Could not find code in iframe");
+                // verificationCode = "111111"; // Commented out - use actual OTP from email
             }
             
             if (verificationCode == null) {
-                System.out.println("⚠️ Could not find verification code, using default: 111111");
-                verificationCode = "111111";
+                System.out.println("⚠️ Could not find verification code");
+                // verificationCode = "111111"; // Commented out - use actual OTP from email
+                throw new RuntimeException("Failed to extract verification code from email");
             }
             
             // Step 6: Navigate back to verification page
